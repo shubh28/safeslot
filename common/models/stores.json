@@ -1,0 +1,51 @@
+{
+  "name": "stores",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "address": {
+      "type": "string",
+      "required": true
+    },
+    "city": {
+      "type": "string",
+      "required": true
+    },
+    "locality": {
+      "type": "string",
+      "required": true
+    },
+    "latitude": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "longitude": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "isOperating": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "stores_slots_count": {
+      "type": "hasMany",
+      "model": "stores_slots_count",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

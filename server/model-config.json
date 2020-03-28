@@ -1,0 +1,46 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "stores": {
+    "dataSource": "bookfromhome",
+    "public": true
+  },
+  "slots": {
+    "dataSource": "bookfromhome",
+    "public": true
+  },
+  "stores_slots_count": {
+    "dataSource": "bookfromhome",
+    "public": true
+  },
+  "bookings": {
+    "dataSource": "bookfromhome",
+    "public": true
+  },
+  "users": {
+    "dataSource": "bookfromhome",
+    "public": true
+  },
+  "AccessToken": {
+    "dataSource": "bookfromhome",
+    "public": false,
+    "strict": true
+  },
+  "ACL": {
+    "dataSource": "bookfromhome",
+    "public": false,
+    "strict": true
+  }
+}

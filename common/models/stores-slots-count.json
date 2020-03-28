@@ -1,0 +1,37 @@
+{
+  "name": "stores_slots_count",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "slot_id": {
+      "type": "string",
+      "required": true
+    },
+    "slot_count": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    }
+  },
+  "validations": [],
+  "relations": {
+    "stores": {
+      "type": "hasMany",
+      "model": "stores",
+      "foreignKey": ""
+    },
+    "slots": {
+      "type": "belongsTo",
+      "model": "slots",
+      "foreignKey": "",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
