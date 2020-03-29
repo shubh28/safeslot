@@ -3,7 +3,8 @@
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
-    "validateUpsert": true
+    "validateUpsert": true,
+    "strictObjectIDCoercion": true
   },
   "properties": {
     "store_id": {
@@ -35,6 +36,14 @@
       "type": "belongsTo",
       "model": "stores",
       "foreignKey": "store_id",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "users": {
+      "type": "belongsTo",
+      "model": "users",
+      "foreignKey": "user_id",
       "options": {
         "nestRemoting": true
       }
