@@ -6,7 +6,8 @@ module.exports = function(app) {
   	Stores.find({
   		where: {and: [{isOperating: true}, {or:[
   				{locality: {regex: new RegExp(`.*${location}.*`, 'i')}},
-  				{city: {regex: new RegExp(`.*${location}.*`, 'i')}}
+  				{city: {regex: new RegExp(`.*${location}.*`, 'i')}},
+          {address: {regex: new RegExp(`.*${location}.*`, 'i')}}
   			]}]}
   	},
   		function(err, stores) {
