@@ -22,6 +22,11 @@
     "password": {
       "type": "string",
       "required": true
+    },
+    "isStoreOwner": {
+      "type": "boolean",
+      "required": true,
+      "default": true 
     }
   },
   "validations": [],

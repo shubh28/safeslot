@@ -28,6 +28,10 @@
       "type": "date",
       "required": true,
       "defaultFn": "now"
+    },
+    "order_details": {
+      "type": "string",
+      "required": false
     }
   },
   "validations": [],
