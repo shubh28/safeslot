@@ -15,7 +15,7 @@ module.exports = function(app) {
             {
               location: {
                 near: userLocation,
-                maxDistance: 1,
+                maxDistance: 10,
                 unit: "kilometers"
               }
             }
