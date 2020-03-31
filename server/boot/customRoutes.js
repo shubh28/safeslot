@@ -23,10 +23,22 @@ module.exports = function(app) {
         }
       },
       function(err, stores) {
-       if (err) {
+        if (err) {
           res.status(400).json(err);
         } else {
-          res.status(200).json(stores);
+          const updatedStores = stores.map(store => {
+            return {
+              ...store,
+              ...{
+                distance: userLocation.distanceTo(
+                  loopback.GeoPoint(store.location),
+                  "kilometers"
+                )
+              }
+            };
+          });
+
+          res.status(200).json(updatedStores);
         }
       }
     );
