@@ -23,20 +23,14 @@
       "type": "string",
       "required": true
     },
-    "latitude": {
-      "type": "number",
-      "required": true,
-      "default": 0
-    },
-    "longitude": {
-      "type": "number",
-      "required": true,
-      "default": 0
-    },
     "isOperating": {
       "type": "boolean",
       "required": true,
       "default": true
+    },
+    "location": {
+      "type": "GeoPoint",
+      "required": true
     }
   },
   "validations": [],
