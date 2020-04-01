@@ -35,6 +35,11 @@
       "model": "AccessToken",
       "type": "hasMany",
       "foreignKey": "userId"
+    },
+    "stores": {
+      "type": "belongsTo",
+      "model": "stores",
+      "foreignKey": "storeId"
     }
   },
   "acls": [],
