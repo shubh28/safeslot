@@ -7,10 +7,6 @@
     "strictObjectIDCoercion": true
   },
   "properties": {
-    "slot_id": {
-      "type": "string",
-      "required": true
-    },
     "slot_count": {
       "type": "number",
       "required": true,
