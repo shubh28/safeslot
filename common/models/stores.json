@@ -31,6 +31,17 @@
     "location": {
       "type": "GeoPoint",
       "required": true
+    },
+    "store_size": {
+      "type": "string"      
+    },
+    "billing_counters": {
+      "type": "number",
+      "required": true,
+      "default": 1
+    },
+    "gstin": {
+      "type": "string"
     }
   },
   "validations": [],
