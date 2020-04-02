@@ -1791,7 +1791,7 @@ loopback-swagger@^5.0.0:
     lodash "^4.17.11"
     strong-globalize "^4.1.1"
 
-loopback@^3.22.0:
+loopback@^3.27.0:
   version "3.27.0"
   resolved "https://registry.yarnpkg.com/loopback/-/loopback-3.27.0.tgz#16384a274a88e9f9073e94c08c5770779ee0a87e"
   integrity sha512-Y8pL1jyIZQf5QfkKZrQaOKdK88GEgBP5JZxfWSgm/k5tF+jbVZxHfqKr+3HUicSDX4HcRS1Fx1vLcPawDqKqaA==
