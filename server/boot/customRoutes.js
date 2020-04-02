@@ -20,6 +20,9 @@ module.exports = function(app) {
               }
             }
           ]
+        },
+        include: {
+          stores_slots_count: "slots"
         }
       },
       function(err, stores) {
