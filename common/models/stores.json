@@ -11,6 +11,12 @@
       "type": "string",
       "required": true
     },
+    "email": {
+      "type": "string",
+    },
+    "phone": {
+      "type": "string",
+    },
     "address": {
       "type": "string",
       "required": true
@@ -33,7 +39,7 @@
       "required": true
     },
     "store_size": {
-      "type": "string"      
+      "type": "string"
     },
     "billing_counters": {
       "type": "number",
@@ -42,6 +48,15 @@
     },
     "gstin": {
       "type": "string"
+    },
+    "isVerified": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "store_type": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
