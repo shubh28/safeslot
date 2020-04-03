@@ -22,6 +22,11 @@
     "password": {
       "type": "string",
       "required": true
+    },
+    "isStoreOwner": {
+      "type": "boolean",
+      "required": true,
+      "default": false
     }
   },
   "validations": [],
@@ -30,6 +35,11 @@
       "model": "AccessToken",
       "type": "hasMany",
       "foreignKey": "userId"
+    },
+    "stores": {
+      "type": "belongsTo",
+      "model": "stores",
+      "foreignKey": "storeId"
     }
   },
   "acls": [],

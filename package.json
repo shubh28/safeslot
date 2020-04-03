@@ -7,22 +7,22 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "start": "nodemon .",
+    "start": "node .",
     "posttest": "npm run lint"
   },
   "dependencies": {
     "compression": "^1.0.3",
     "cors": "^2.5.2",
-    "helmet": "^3.10.0",
-    "loopback": "^3.22.0",
-    "loopback-boot": "^2.6.5",
+    "helmet": "^3.22.0",
+    "loopback": "^3.27.0",
+    "loopback-boot": "^3.3.1",
     "loopback-component-explorer": "^6.2.0",
     "loopback-connector-mongodb": "^4.2.0",
     "serve-favicon": "^2.0.1",
     "strong-error-handler": "^3.0.0"
   },
   "devDependencies": {
-    "eslint": "^3.17.1",
+    "eslint": "^6.8.0",
     "eslint-config-loopback": "^8.0.0",
     "nodemon": "^2.0.2"
   },
