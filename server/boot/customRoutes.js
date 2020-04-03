@@ -8,20 +8,29 @@ module.exports = function(app) {
     var lng = req.query.lng;
 
     if (!lat || !lng) {
-      Stores.find({
-          where: {and: [{isOperating: true}, {or:[
-              {locality: {regex: new RegExp(`.*${location}.*`, 'i')}},
-              {city: {regex: new RegExp(`.*${location}.*`, 'i')}},
-              {address: {regex: new RegExp(`.*${location}.*`, 'i')}}
-            ]}]}
+      Stores.find(
+        {
+          where: {
+            and: [
+              { isOperating: true },
+              {
+                or: [
+                  { locality: { regex: new RegExp(`.*${location}.*`, "i") } },
+                  { city: { regex: new RegExp(`.*${location}.*`, "i") } },
+                  { address: { regex: new RegExp(`.*${location}.*`, "i") } }
+                ]
+              }
+            ]
+          }
         },
-          function(err, stores) {
-            if (err) {
-              res.status(400).json(err);
-            } else {
-                res.status(200).json(stores);
-            }
-          });
+        function(err, stores) {
+          if (err) {
+            res.status(400).json(err);
+          } else {
+            res.status(200).json(stores);
+          }
+        }
+      );
     } else {
       var userLocation = new loopback.GeoPoint({ lng: lng, lat: lat });
       Stores.find(
@@ -37,6 +46,9 @@ module.exports = function(app) {
                 }
               }
             ]
+          },
+          include: {
+            stores_slots_count: "slots"
           }
         },
         function(err, stores) {
@@ -59,7 +71,6 @@ module.exports = function(app) {
           }
         }
       );
-
     }
   });
   app.use(router);
