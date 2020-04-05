@@ -57,6 +57,9 @@
     "store_type": {
       "type": "string",
       "required": true
+    },
+    "referredBy": {
+      "type": "string"
     }
   },
   "validations": [],

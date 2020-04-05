@@ -1,12 +1,8 @@
 {
-  "bookfromhome": {
-    "host": "cluster0-nf1ys.mongodb.net",
+    "bookfromhome": {
     "port": 27017,
-    "url": "mongodb+srv://admin:admin@cluster0-nf1ys.mongodb.net/bookfromhome?retryWrites=true&w=majority",
     "database": "bookfromhome",
-    "password": "admin",
     "name": "bookfromhome",
-    "user": "admin",
     "useNewUrlParser": true,
     "connector": "mongodb",
     "allowExtendedOperators": true
