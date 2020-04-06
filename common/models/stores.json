@@ -12,10 +12,10 @@
       "required": true
     },
     "email": {
-      "type": "string",
+      "type": "string"
     },
     "phone": {
-      "type": "string",
+      "type": "string"
     },
     "address": {
       "type": "string",
@@ -65,6 +65,11 @@
       "type": "hasMany",
       "model": "stores_slots_count",
       "foreignKey": ""
+    },
+    "stores_slots": {
+      "type": "hasOne",
+      "model": "slots",
+      "foreignKey": "storeId"
     }
   },
   "acls": [],

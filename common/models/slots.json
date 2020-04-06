@@ -7,13 +7,24 @@
     "strictObjectIDCoercion": true
   },
   "properties": {
-    "start_time": {
-      "type": "string",
+    "start_hours": {
+      "type": "number",
       "required": true
     },
-    "end_time": {
-      "type": "string",
+    "start_minutes": {
+      "type": "number",
       "required": true
+    },
+    "end_hours": {
+      "type": "number",
+      "required": true
+    },
+    "end_minutes": {
+      "type": "number",
+      "required": true
+    },
+    "max_people_allowed": {
+      "type": "number"
     }
   },
   "validations": [],
