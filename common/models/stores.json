@@ -12,10 +12,10 @@
       "required": true
     },
     "email": {
-      "type": "string",
+      "type": "string"
     },
     "phone": {
-      "type": "string",
+      "type": "string"
     },
     "address": {
       "type": "string",
