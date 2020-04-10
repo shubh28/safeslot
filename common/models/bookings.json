@@ -51,6 +51,14 @@
       "options": {
         "nestRemoting": true
       }
+    },
+    "slots": {
+      "type": "belongsTo",
+      "model": "slots",
+      "foreignKey": "slot_id",
+      "options": {
+        "nestRemoting": true
+      }
     }
   },
   "acls": [],
