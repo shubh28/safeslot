@@ -42,5 +42,9 @@
     "dataSource": "bookfromhome",
     "public": false,
     "strict": true
+  },
+  "stores_slots": {
+    "dataSource": "bookfromhome",
+    "public": true
   }
 }

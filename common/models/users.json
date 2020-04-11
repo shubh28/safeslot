@@ -32,8 +32,8 @@
   "validations": [],
   "relations": {
     "accessTokens": {
-      "model": "AccessToken",
       "type": "hasMany",
+      "model": "AccessToken",
       "foreignKey": "userId"
     },
     "stores": {

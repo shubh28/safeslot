@@ -1,0 +1,43 @@
+{
+  "name": "stores_slots",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "start_hours": {
+      "type": "number",
+      "required": true
+    },
+    "start_minutes": {
+      "type": "number",
+      "required": true
+    },
+    "end_hours": {
+      "type": "number",
+      "required": true
+    },
+    "end_minutes": {
+      "type": "number",
+      "required": true
+    },
+    "maximun_people_allowed": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "stores": {
+      "type": "belongsTo",
+      "model": "stores",
+      "foreignKey": "storeId",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
