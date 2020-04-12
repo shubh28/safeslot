@@ -51,7 +51,7 @@ module.exports = function(app) {
           include: [{
             relation: "stores_slots"
           },{
-            relation: "stores_slots_count"
+            "stores_slots_count": "slots"
           }]
         },
         function(err, stores) {
