@@ -33,6 +33,7 @@ module.exports = function(app) {
       );
     } else {
       var userLocation = new loopback.GeoPoint({ lng: lng, lat: lat });
+      console.log(userLocation)
       Stores.find(
         {
           where: {
@@ -47,9 +48,11 @@ module.exports = function(app) {
               }
             ]
           },
-          include: {
-            stores_slots_count: "slots"
-          }
+          include: [{
+            relation: "stores_slots"
+          },{
+            relation: "stores_slots_count"
+          }]
         },
         function(err, stores) {
           if (err) {
