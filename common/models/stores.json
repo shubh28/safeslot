@@ -68,6 +68,11 @@
       "type": "hasMany",
       "model": "stores_slots_count",
       "foreignKey": ""
+    },
+    "stores_slots": {
+      "type": "hasMany",
+      "model": "stores_slots",
+      "foreignKey": "storeId"
     }
   },
   "acls": [],
