@@ -59,7 +59,16 @@
       "options": {
         "nestRemoting": true
       }
+    },
+    "stores_slots": {
+      "type": "belongsTo",
+      "model": "stores_slots",
+      "foreignKey": "slot_id",
+      "options": {
+        "nestRemoting": true
+      }
     }
+
   },
   "acls": [],
   "methods": {}
