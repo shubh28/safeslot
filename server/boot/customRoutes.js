@@ -53,7 +53,7 @@ module.exports = function(app) {
             scope: {
               where: {
                 start_hours: {
-                  gt: new Date().getHours() - 1
+                  gt: new Date().getUTCHours() + 5
                 }
               }
             }
