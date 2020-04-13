@@ -33,7 +33,7 @@ module.exports = function(app) {
       );
     } else {
       var userLocation = new loopback.GeoPoint({ lng: lng, lat: lat });
-      console.log(userLocation)
+      console.log(new Date().getHours())
       Stores.find(
         {
           where: {
@@ -49,7 +49,14 @@ module.exports = function(app) {
             ]
           },
           include: [{
-            relation: "stores_slots"
+            relation: "stores_slots",
+            scope: {
+              where: {
+                start_hours: {
+                  gt: new Date().getHours() - 1
+                }
+              }
+            }
           },{
             "stores_slots_count": "slots"
           }]
