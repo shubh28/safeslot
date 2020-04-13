@@ -110,15 +110,13 @@ module.exports = function(app) {
           console.log(err);
           res.status(500).json(err);
         } else {
-          console.log(bookings);
           const booking = bookings[0];
-          const maxPeopleInSlot = booking && booking.stores_slots && booking.stores_slots.maximun_people_allowed;
-          if (bookings.length === maxPeopleInSlot) {
+          const maxPeopleInSlot = booking && booking.stores_slots && booking.stores_slots() && booking.stores_slots().maximun_people_allowed;
+          if (bookings.length >= maxPeopleInSlot) {
             return res.status(400).json({message: "This slot is full please use another slot!"});
           } else {
             return res.status(200).json({message: "Success"});
-          }
-          
+          }          
         }
       }
     )
