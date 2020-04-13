@@ -34,8 +34,8 @@ module.exports = function(app) {
     } else {
       var userLocation = new loopback.GeoPoint({ lng: lng, lat: lat });
       console.log(new Date().getHours())
-      const hours = new Date().getUTCHours() + 5;
-      if (new Date().getUTCHours() + 5 >= 24) {
+      let hours = new Date().getUTCHours() + 5;
+      if (hours >= 24) {
         hours -= 24;
       }
       Stores.find(
