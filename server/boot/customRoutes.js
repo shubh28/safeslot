@@ -34,6 +34,10 @@ module.exports = function(app) {
     } else {
       var userLocation = new loopback.GeoPoint({ lng: lng, lat: lat });
       console.log(new Date().getHours())
+      const hours = new Date().getUTCHours() + 5;
+      if (new Date().getUTCHours() + 5 >= 24) {
+        hours -= 24;
+      }
       Stores.find(
         {
           where: {
@@ -53,7 +57,7 @@ module.exports = function(app) {
             scope: {
               where: {
                 start_hours: {
-                  gt: new Date().getUTCHours() + 5
+                  gt: hours
                 }
               }
             }
@@ -83,5 +87,43 @@ module.exports = function(app) {
       );
     }
   });
+
+  router.get("/api/booking-slot/status", function(req, res) {
+    const storeId = req.query.storeId;
+    const slotId = req.query.slotId;
+    if (!storeId || !slotId) {
+      return res.status(400).json({message: 'Sufficient params not provided'})
+    }
+    var Bookings = app.models.Bookings;
+    Bookings.find(
+      {
+        where: {
+          and: [
+            {slot_id: slotId},
+            {store_id: storeId}
+          ]
+        },
+        include: "stores_slots"
+      },
+      function(err, bookings = []) {
+        if (err) {
+          console.log(err);
+          res.status(500).json(err);
+        } else {
+          console.log(bookings);
+          const booking = bookings[0];
+          const maxPeopleInSlot = booking && booking.stores_slots && booking.stores_slots.maximun_people_allowed;
+          if (bookings.length === maxPeopleInSlot) {
+            return res.status(400).json({message: "This slot is full please use another slot!"});
+          } else {
+            return res.status(200).json({message: "Success"});
+          }
+          
+        }
+      }
+    )
+  })
+
+
   app.use(router);
 };
