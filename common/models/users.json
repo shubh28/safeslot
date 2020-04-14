@@ -27,6 +27,11 @@
       "type": "boolean",
       "required": true,
       "default": false
+    },
+    "created_at": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now"
     }
   },
   "validations": [],
