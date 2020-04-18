@@ -17,14 +17,6 @@
     "dataSource": "bookfromhome",
     "public": true
   },
-  "slots": {
-    "dataSource": "bookfromhome",
-    "public": true
-  },
-  "stores_slots_count": {
-    "dataSource": "bookfromhome",
-    "public": true
-  },
   "bookings": {
     "dataSource": "bookfromhome",
     "public": true
