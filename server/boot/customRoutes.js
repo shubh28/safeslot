@@ -61,8 +61,6 @@ module.exports = function(app) {
                 }
               }
             }
-          },{
-            "stores_slots_count": "slots"
           }]
         },
         function(err, stores) {
