@@ -3,7 +3,7 @@ module.exports = function (app) {
   const router = app.loopback.Router();
   const Stores = app.models.Stores;
   const Bookings = app.models.Bookings;
-  const Stores_slots = app.models.Stores_slots;
+  const Stores_slots = app.models.stores_slots;
   const bodyParser = require("body-parser");
   app.use(bodyParser.json({ extended: true }));
 
@@ -11,9 +11,9 @@ module.exports = function (app) {
     //front-end req needs to pass in store_id, slot_id, user_id
     //also takes order_details for users with email-linked accounts
     const newBooking = req.body;
-    const store = Stores.findById(store_id);
-    const bookings = Bookings.find({ "where": { "slot_id": slot_id } }); ///and store_id = store_id
-    const slot = Stores_slots.findById(slot_id);
+    const store = Stores.findById(newBooking.store_id);
+    const bookings = Bookings.find({ "where": { "slot_id": newBooking.slot_id } });
+    const slot = Stores_slots.findById(newBooking.slot_id);
 
     Promise.all([store, bookings, slot])
       .then(queries => {
@@ -22,10 +22,10 @@ module.exports = function (app) {
         const slotResult = queries[2];
         const maxPeopleAllowed = slotResult.maximun_people_allowed;
 
-        if (!storeResult.isVerified || (bookingsResult.length < maxPeopleAllowed && storeResult.isVerified)) {
+        if (!storeResult.isVerified || bookingsResult.length < maxPeopleAllowed && storeResult.isVerified) {
           Bookings.create(newBooking)
             .then(createdBooking => res.json(createdBooking))
-            .catch(err => console.log(err));
+            .catch(err => console.log(err))
         } else {
           res.json({ "error": "This time slot is no longer available. Try a different slot." })
         }

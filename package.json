@@ -23,6 +23,7 @@
     "strong-error-handler": "^3.0.0"
   },
   "devDependencies": {
+    "body-parser": "^1.19.0",
     "eslint": "^6.8.0",
     "eslint-config-loopback": "^8.0.0",
     "nodemon": "^2.0.3"
