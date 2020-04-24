@@ -16,11 +16,14 @@ module.exports = function (app) {
 
     Promise.all([bookings, slot])
       .then(queries => {
-        const bookingsResult = queries[0];
         const slotResult = queries[1];
-        const maxPeopleAllowed = slotResult.maximun_people_allowed;
-        const isVerified = slotResult.stores().isVerified;
+        if (!slotResult) {
+          res.json({ "error": "This slot does not exist" })
+        }
 
+        const maxPeopleAllowed = slotResult.maximun_people_allowed;
+        const bookingsResult = queries[0];
+        const isVerified = slotResult.stores().isVerified;
         if (!isVerified || isVerified && bookingsResult.length < maxPeopleAllowed) {
           Bookings.create(newBooking)
             .then(createdBooking => res.json(createdBooking))
