@@ -11,18 +11,17 @@ module.exports = function (app) {
     //front-end req needs to pass in store_id, slot_id, user_id
     //also takes order_details for users with email-linked accounts
     const newBooking = req.body;
-    const store = Stores.findById(newBooking.store_id);
     const bookings = Bookings.find({ "where": { "slot_id": newBooking.slot_id } });
-    const slot = Stores_slots.findById(newBooking.slot_id);
+    const slot = Stores_slots.findById(newBooking.slot_id, { include: 'stores' });
 
-    Promise.all([store, bookings, slot])
+    Promise.all([bookings, slot])
       .then(queries => {
-        const storeResult = queries[0];
-        const bookingsResult = queries[1];
-        const slotResult = queries[2];
+        const bookingsResult = queries[0];
+        const slotResult = queries[1];
         const maxPeopleAllowed = slotResult.maximun_people_allowed;
+        const isVerified = slotResult.stores().isVerified;
 
-        if (!storeResult.isVerified || bookingsResult.length < maxPeopleAllowed && storeResult.isVerified) {
+        if (!isVerified || isVerified && bookingsResult.length < maxPeopleAllowed) {
           Bookings.create(newBooking)
             .then(createdBooking => res.json(createdBooking))
             .catch(err => console.log(err))
