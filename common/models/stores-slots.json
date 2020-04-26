@@ -25,6 +25,7 @@
     },
     "maximun_people_allowed": {
       "type": "number",
+      "default": 5,
       "required": true
     },
     "created_at": {
