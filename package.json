@@ -19,7 +19,8 @@
     "loopback-component-explorer": "^6.2.0",
     "loopback-connector-mongodb": "^4.2.0",
     "serve-favicon": "^2.0.1",
-    "strong-error-handler": "^3.0.0"
+    "strong-error-handler": "^3.0.0",
+    "tzwhere": "^1.0.1"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
