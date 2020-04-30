@@ -6,6 +6,7 @@ module.exports = function(app) {
     var location = req.query.location;
     var lat = req.query.lat;
     var lng = req.query.lng;
+    var date = req.query.time || 0;
 
     if (!lat || !lng) {
       Stores.find(
@@ -33,8 +34,8 @@ module.exports = function(app) {
       );
     } else {
       var userLocation = new loopback.GeoPoint({ lng: lng, lat: lat });
-      console.log(new Date().getHours())
-      let hours = new Date().getUTCHours() + 5;
+      var hours = new Date(parseInt(date)).getHours() || 0;
+      console.log(new Date(parseInt(date)).getHours())
       if (hours >= 24) {
         hours -= 24;
       }
