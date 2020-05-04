@@ -11,14 +11,17 @@
     "posttest": "npm run lint"
   },
   "dependencies": {
+    "aws-sdk": "^2.669.0",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
+    "fs": "0.0.1-security",
     "helmet": "^3.22.0",
     "loopback": "^3.27.0",
     "loopback-boot": "^3.3.1",
     "loopback-component-explorer": "^6.2.0",
     "loopback-connector-mongodb": "^4.2.0",
     "serve-favicon": "^2.0.1",
+    "sharp": "^0.25.2",
     "strong-error-handler": "^3.0.0"
   },
   "devDependencies": {
