@@ -129,7 +129,7 @@ module.exports = function (app) {
             booking.stores_slots &&
             booking.stores_slots() &&
             booking.stores_slots().maximun_people_allowed;
-          if (maxPeopleInSlot <= 0) {
+          if (bookings.length >= maxPeopleInSlot) {
             return res
               .status(400)
               .json({ message: "This slot is full please use another slot!" });
