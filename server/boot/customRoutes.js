@@ -56,9 +56,20 @@ module.exports = function(app) {
             relation: "stores_slots",
             scope: {
               where: {
-                start_hours: {
-                  gt: hours
-                }
+                and: [
+                  {
+                    start_hours: {
+                    gt: hours
+                    }
+                  },
+                  {
+                    maximun_people_allowed:
+                    {
+                      gt: 0
+                    }
+                    
+                  }
+                  ]
               }
             }
           }]
