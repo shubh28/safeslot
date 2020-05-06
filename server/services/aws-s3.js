@@ -26,13 +26,16 @@ class AWS_S3 {
       let params = {
         Body: buffer,
         Bucket: process.env.AWS_S3_BUCKET_NAME,
-        Key: name
+        Key: name,
+        ACL: "public-read"
       };
 
-      this.s3.putObject(params, (error, data) => {
+      this.s3.upload(params, (error, data) => {
         if (error)
           reject(error);
+        console.log("AWS S3 data");
 
+        console.log(data);
         resolve(data);
       });
     });

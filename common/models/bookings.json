@@ -32,6 +32,10 @@
     "order_details": {
       "type": "string",
       "required": false
+    },
+    "order_data": {
+      "type": "object",
+      "required": false
     }
   },
   "validations": [],
