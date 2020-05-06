@@ -70,7 +70,11 @@ module.exports = function (app) {
                     }
                   ]
                 },
-                include: "bookings"
+                include: [
+                  {
+                    relation: "bookings"
+                  }
+                ]
               }
             }
           ]
