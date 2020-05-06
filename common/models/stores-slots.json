@@ -46,7 +46,7 @@
     "bookings": {
       "type": "hasMany",
       "model": "bookings",
-      "foreignKey": "store_id"
+      "foreignKey": "slot_id"
     }
   },
   "acls": [],
