@@ -147,7 +147,10 @@ module.exports = function (app) {
 
       Promise.all(promiseArr)
         .then(result => {
-          console.log(JSON.parse(JSON.stringify(result)));
+          formattedBooking.order_data = result;
+          return Bookings.create(formattedBooking);
+        })
+        .then(savedBooking => {
           res.send();
         })
         .catch(err => {
