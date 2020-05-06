@@ -69,7 +69,12 @@ module.exports = function (app) {
                       }
                     }
                   ]
-                }
+                },
+                include: [
+                  {
+                    relation: "bookings"
+                  }
+                ]
               }
             }
           ]
