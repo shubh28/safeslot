@@ -1,6 +1,7 @@
 const fs = require('fs');
 const AWS = require('aws-sdk');
 const Sharp = require('sharp');
+const moment = require('moment');
 
 class AWS_S3 {
   constructor() {
@@ -33,9 +34,7 @@ class AWS_S3 {
       this.s3.upload(params, (error, data) => {
         if (error)
           reject(error);
-        console.log("AWS S3 data");
 
-        console.log(data);
         resolve(data);
       });
     });
@@ -58,8 +57,10 @@ class AWS_S3 {
    * This function will be used by the API to generate a thumbnail and upload both the original and thumbnail to AWS S3
    * @param {String} filePath 
    * @param {String} name 
+   * @param {String} user_id
    */
-  generateThumbnailAndUpload(filePath, name) {
+  generateThumbnailAndUpload(filePath, name, user_id) {
+    name = user_id + '_' + moment().format('YYYY_MM_DD_hh_mm_SS') + '_' + name;
     let originalFileBuffer = fs.readFileSync(filePath);
     return this.generateThumbnail(filePath)
       .then(resizedFileBuffer => {

@@ -1,6 +1,6 @@
 var loopback = require("loopback");
 let multiparty = require('multiparty');
-let AWS_S3 = require('../services/aws-s3');
+let bookingService = require('../services/booking-service');
 
 module.exports = function (app) {
   var router = app.loopback.Router();
@@ -128,34 +128,11 @@ module.exports = function (app) {
     let form = new multiparty.Form();
 
     form.parse(req, (err, fields, files) => {
-      let Bookings = app.models.Bookings;
-      let formattedBooking = {
-        store_id: fields.store_id,
-        slot_id: fields.slot_id,
-        user_id: fields.user_id,
-        status: fields.status,
-        booking_date: fields.booking_date,
-        order_details: fields.order_details
-      };
-
-      let promiseArr = [];
-      files.prescriptions.forEach(file => {
-        promiseArr.push(
-          AWS_S3.generateThumbnailAndUpload(file.path, file.originalFilename)
-        );
-      });
-
-      Promise.all(promiseArr)
-        .then(result => {
-          formattedBooking.order_data = result;
-          return Bookings.create(formattedBooking);
-        })
-        .then(savedBooking => {
-          res.send();
-        })
-        .catch(err => {
-          res.status(500).json({ message: err });
-        });
+      if (err)
+        res.status(500).json({ msg: 'Something went wrong' });
+      bookingService.bookSlot(app, fields, files)
+        .then(data => res.json(data))
+        .catch(err => res.status(500).json({ msg: 'Something went wrong' }));
     });
   })
 
