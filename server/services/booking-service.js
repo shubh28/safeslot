@@ -40,6 +40,44 @@ module.exports.bookSlot = (app, fields, files) => {
     })
 };
 
+module.exports.updateSlot = (app, fields, files) => {
+  let Bookings = app.models.Bookings;
+
+  let promiseArr = [];
+  files.prescriptions.forEach(file => {
+    promiseArr.push(
+      AWS_S3.generateThumbnailAndUpload(file.path, file.originalFilename, fields.user_id)
+        .then(data => formatUploadedObject(data))
+    );
+  });
+
+  let booking;
+  return Bookings.findById(fields.id)
+    .then(savedBooking => {
+      booking = savedBooking;
+      return Promise.all(promiseArr);
+    })
+    .then(uploadedFiles => {
+      let formattedPrescriptions = {};
+      uploadedFiles.forEach(e => {
+        formattedPrescriptions[Object.keys(e)[0]] = e[Object.keys(e)[0]];
+      });
+
+      booking.store_id = fields.store_id;
+      booking.slot_id = fields.slot_id;
+      booking.user_id = fields.user_id;
+      booking.status = fields.status;
+      booking.booking_date = fields.booking_date;
+      booking.order_details = fields.order_detail;
+      booking.booking_data = { prescriptions: formattedPrescriptions };
+      return booking.save();
+    })
+    .catch(err => {
+      console.error(err);
+      return Promise.reject();
+    })
+};
+
 let formatUploadedObject = (data) => {
   return {
     [data[0].key]: {
