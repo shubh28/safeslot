@@ -1,8 +1,8 @@
 var loopback = require("loopback");
-module.exports = function(app) {
+module.exports = function (app) {
   var router = app.loopback.Router();
   var Stores = app.models.Stores;
-  router.get("/api/stores/location", function(req, res) {
+  router.get("/api/stores/location", function (req, res) {
     var location = req.query.location;
     var lat = req.query.lat;
     var lng = req.query.lng;
@@ -24,7 +24,7 @@ module.exports = function(app) {
             ]
           }
         },
-        function(err, stores) {
+        function (err, stores) {
           if (err) {
             res.status(400).json(err);
           } else {
@@ -34,7 +34,7 @@ module.exports = function(app) {
       );
     } else {
       var userLocation = new loopback.GeoPoint({ lng: lng, lat: lat });
-      console.log(hours)
+      console.log(hours);
       if (hours >= 24) {
         hours -= 24;
       }
@@ -52,29 +52,34 @@ module.exports = function(app) {
               }
             ]
           },
-          include: [{
-            relation: "stores_slots",
-            scope: {
-              where: {
-                and: [
-                  {
-                    start_hours: {
-                    gt: hours
-                    }
-                  },
-                  {
-                    maximun_people_allowed:
+          include: [
+            {
+              relation: "stores_slots",
+              scope: {
+                where: {
+                  and: [
                     {
-                      gt: 0
+                      start_hours: {
+                        gt: hours
+                      }
+                    },
+                    {
+                      maximun_people_allowed: {
+                        gt: 0
+                      }
                     }
-                    
-                  }
                   ]
+                },
+                include: [
+                  {
+                    relation: "bookings"
+                  }
+                ]
               }
             }
-          }]
+          ]
         },
-        function(err, stores) {
+        function (err, stores) {
           if (err) {
             res.status(400).json(err);
           } else {
@@ -97,40 +102,44 @@ module.exports = function(app) {
     }
   });
 
-  router.get("/api/booking-slot/status", function(req, res) {
+  router.get("/api/booking-slot/status", function (req, res) {
     const storeId = req.query.storeId;
     const slotId = req.query.slotId;
     if (!storeId || !slotId) {
-      return res.status(400).json({message: 'Sufficient params not provided'})
+      return res
+        .status(400)
+        .json({ message: "Sufficient params not provided" });
     }
     var Bookings = app.models.Bookings;
     Bookings.find(
       {
         where: {
-          and: [
-            {slot_id: slotId},
-            {store_id: storeId}
-          ]
+          and: [{ slot_id: slotId }, { store_id: storeId }]
         },
         include: "stores_slots"
       },
-      function(err, bookings = []) {
+      function (err, bookings = []) {
         if (err) {
           console.log(err);
           res.status(500).json(err);
         } else {
           const booking = bookings[0];
-          const maxPeopleInSlot = booking && booking.stores_slots && booking.stores_slots() && booking.stores_slots().maximun_people_allowed;
+          const maxPeopleInSlot =
+            booking &&
+            booking.stores_slots &&
+            booking.stores_slots() &&
+            booking.stores_slots().maximun_people_allowed;
           if (bookings.length >= maxPeopleInSlot) {
-            return res.status(400).json({message: "This slot is full please use another slot!"});
+            return res
+              .status(400)
+              .json({ message: "This slot is full please use another slot!" });
           } else {
-            return res.status(200).json({message: "Success"});
-          }          
+            return res.status(200).json({ message: "Success" });
+          }
         }
       }
-    )
-  })
-
+    );
+  });
 
   app.use(router);
 };
