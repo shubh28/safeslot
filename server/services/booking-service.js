@@ -1,6 +1,5 @@
 let AWS_S3 = require('./aws-s3');
 
-
 module.exports.bookSlot = (app, fields, files) => {
   let Bookings = app.models.Bookings;
   let formattedBooking = {
@@ -27,9 +26,13 @@ module.exports.bookSlot = (app, fields, files) => {
       return Promise.all(promiseArr);
     })
     .then(uploadedFiles => {
-      // let formattedPrescriptions = { prescriptions:  }
-      console.log(JSON.stringify(uploadedFiles));
-      return Promise.resolve();
+      let formattedPrescriptions = {};
+      uploadedFiles.forEach(e => {
+        formattedPrescriptions[Object.keys(e)[0]] = e[Object.keys(e)[0]];
+      });
+
+      booking.booking_data = { prescriptions: formattedPrescriptions };
+      return booking.save();
     })
     .catch(err => {
       console.error(err);
