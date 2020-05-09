@@ -93,12 +93,18 @@ module.exports = function(app) {
       return res.status(400).json({message: 'Sufficient params not provided'})
     }
     var Bookings = app.models.Bookings;
+    var date = new Date();
+    date.setHours(0);
+    date.setMinutes(0);
+    date.setSeconds(0);
+    console.log(date);
     Bookings.find(
       {
         where: {
           and: [
             {slot_id: slotId},
-            {store_id: storeId}
+            {store_id: storeId},
+            {booking_date: {gt: date}}
           ]
         },
         include: "stores_slots"
