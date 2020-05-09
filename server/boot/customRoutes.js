@@ -103,17 +103,25 @@ module.exports = function (app) {
   });
 
   router.get("/api/booking-slot/status", function (req, res) {
-    const storeId = req.query.storeId;
-    const slotId = req.query.slotId;
-    if (!storeId || !slotId) {
+    const { storeId, slotId, date } = req.query;
+    if (!storeId || !slotId || !date) {
       return res
         .status(400)
         .json({ message: "Sufficient params not provided" });
     }
     var Bookings = app.models.Bookings;
+    var startOfToday = new Date();
+    startOfToday.setHours(0);
+    startOfToday.setMinutes(0);
+    startOfToday.setSeconds(0);
+    startOfToday.setMilliseconds(0);
+    startOfToday = startOfToday.toISOString();
     Bookings.find(
       {
         where: {
+          booking_date: {
+            gt: startOfToday
+          },
           and: [{ slot_id: slotId }, { store_id: storeId }]
         },
         include: "stores_slots"
