@@ -5,7 +5,6 @@ const moment = require('moment');
 
 class AWS_S3 {
   constructor() {
-    console.log("constructor called");
     this.config = {
       apiVersion: "2006-03-01",
       accessKeyId: process.env.AWS_ACCESS_KEY_ID,

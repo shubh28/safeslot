@@ -138,11 +138,12 @@ module.exports = function (app) {
 
   router.put("/api/booking-slot/", (req, res) => {
     let form = new multiparty.Form();
+    const slotId = req.query.slotId;
 
     form.parse(req, (err, fields, files) => {
       if (err)
         res.status(500).json({ msg: 'Something went wrong' });
-      bookingService.updateSlot(app, fields, files)
+      bookingService.updateSlot(app, fields, files, slotId)
         .then(data => res.json(data))
         .catch(err => res.status(500).json({ msg: 'Something went wrong' }));
     });

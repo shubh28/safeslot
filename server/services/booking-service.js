@@ -40,7 +40,7 @@ module.exports.bookSlot = (app, fields, files) => {
     })
 };
 
-module.exports.updateSlot = (app, fields, files) => {
+module.exports.updateSlot = (app, fields, files, slotId) => {
   let Bookings = app.models.Bookings;
 
   let promiseArr = [];
@@ -52,7 +52,7 @@ module.exports.updateSlot = (app, fields, files) => {
   });
 
   let booking;
-  return Bookings.findById(fields.id)
+  return Bookings.findById(slotId)
     .then(savedBooking => {
       booking = savedBooking;
       return Promise.all(promiseArr);
