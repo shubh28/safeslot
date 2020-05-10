@@ -8,6 +8,13 @@ module.exports = function (app) {
     var lng = req.query.lng;
     var hours = req.query.time || 0;
 
+    var date = new Date();
+    date.setHours(0);
+    date.setMinutes(0);
+    date.setSeconds(0);
+    console.log(date);
+
+
     if (!lat || !lng) {
       Stores.find(
         {
@@ -72,7 +79,14 @@ module.exports = function (app) {
                 },
                 include: [
                   {
-                    relation: "bookings"
+                    relation: "bookings",
+                    scope: {
+                      where: {
+                        booking_date: {
+                          gt: date
+                        }
+                      }
+                    }
                   }
                 ]
               }
