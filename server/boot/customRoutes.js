@@ -136,7 +136,7 @@ module.exports = function (app) {
     });
   })
 
-  router.put("/api/booking-slot/", (req, res) => {
+  router.patch("/api/booking-slot/", (req, res) => {
     let form = new multiparty.Form();
     const slotId = req.query.slotId;
 
