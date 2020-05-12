@@ -44,7 +44,7 @@ module.exports.bookSlot = (app, fields, files) => {
 
 module.exports.updateSlot = (app, fields, files, slotId) => {
   let Bookings = app.models.Bookings;
-
+  console.log(Object.keys(fields));
   let promiseArr = [];
   if (files && Object.keys(files).length !== 0) {
     console.log(files);
