@@ -47,6 +47,7 @@ module.exports.updateSlot = (app, fields, files, slotId) => {
 
   let promiseArr = [];
   if (files) {
+    console.log(files);
     files.prescriptions.forEach(file => {
       promiseArr.push(
         AWS_S3.generateThumbnailAndUpload(file.path, file.originalFilename, fields.user_id)
