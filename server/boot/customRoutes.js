@@ -128,8 +128,11 @@ module.exports = function (app) {
     let form = new multiparty.Form();
 
     form.parse(req, (err, fields, files) => {
-      if (err)
-        res.status(500).json({ msg: 'Something went wrong' });
+      if (err) {
+        console.error(err);
+        res.status(500).json({ msg: 'Something went wrong' }).send();
+      }
+
       bookingService.bookSlot(app, fields, files)
         .then(data => res.json(data))
         .catch(err => res.status(500).json({ msg: 'Something went wrong' }));
@@ -141,8 +144,11 @@ module.exports = function (app) {
     const slotId = req.query.slotId;
 
     form.parse(req, (err, fields, files) => {
-      if (err)
-        res.status(500).json({ msg: 'Something went wrong' });
+      if (err) {
+        console.error(err);
+        res.status(500).json({ msg: 'Something went wrong' }).send();
+      }
+
       bookingService.updateSlot(app, fields, files, slotId)
         .then(data => res.json(data))
         .catch(err => res.status(500).json({ msg: 'Something went wrong' }));
