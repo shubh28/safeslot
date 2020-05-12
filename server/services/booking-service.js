@@ -12,12 +12,14 @@ module.exports.bookSlot = (app, fields, files) => {
   };
 
   let promiseArr = [];
-  files.prescriptions.forEach(file => {
-    promiseArr.push(
-      AWS_S3.generateThumbnailAndUpload(file.path, file.originalFilename, fields.user_id)
-        .then(data => formatUploadedObject(data))
-    );
-  });
+  if (files) {
+    files.prescriptions.forEach(file => {
+      promiseArr.push(
+        AWS_S3.generateThumbnailAndUpload(file.path, file.originalFilename, fields.user_id)
+          .then(data => formatUploadedObject(data))
+      );
+    });
+  }
 
   let booking;
   return Bookings.create(formattedBooking)
@@ -44,12 +46,14 @@ module.exports.updateSlot = (app, fields, files, slotId) => {
   let Bookings = app.models.Bookings;
 
   let promiseArr = [];
-  files.prescriptions.forEach(file => {
-    promiseArr.push(
-      AWS_S3.generateThumbnailAndUpload(file.path, file.originalFilename, fields.user_id)
-        .then(data => formatUploadedObject(data))
-    );
-  });
+  if (files) {
+    files.prescriptions.forEach(file => {
+      promiseArr.push(
+        AWS_S3.generateThumbnailAndUpload(file.path, file.originalFilename, fields.user_id)
+          .then(data => formatUploadedObject(data))
+      );
+    });
+  }
 
   let booking;
   return Bookings.findById(slotId)
