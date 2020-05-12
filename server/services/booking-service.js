@@ -46,7 +46,7 @@ module.exports.updateSlot = (app, fields, files, slotId) => {
   let Bookings = app.models.Bookings;
 
   let promiseArr = [];
-  if (files) {
+  if (files && Object.keys(files).length !== 0) {
     console.log(files);
     files.prescriptions.forEach(file => {
       promiseArr.push(
