@@ -44,10 +44,10 @@ module.exports.bookSlot = (app, fields, files) => {
 
 module.exports.updateSlot = (app, fields, files, slotId) => {
   let Bookings = app.models.Bookings;
-  console.log(Object.keys(fields));
+  console.log(fields);
+  console.log(files);
   let promiseArr = [];
-  if (files && Object.keys(files).length !== 0) {
-    console.log(files);
+  if (files) {
     files.prescriptions.forEach(file => {
       promiseArr.push(
         AWS_S3.generateThumbnailAndUpload(file.path, file.originalFilename, fields.user_id)
