@@ -60,6 +60,11 @@ module.exports.updateSlot = (app, fields, files, slotId) => {
   return Bookings.findById(slotId)
     .then(savedBooking => {
       booking = savedBooking;
+      if (!booking) {
+        console.log(`no booking found for slot ${slotId}`);
+        return Promise.reject();
+      }
+
       return Promise.all(promiseArr);
     })
     .then(uploadedFiles => {
@@ -84,8 +89,8 @@ module.exports.updateSlot = (app, fields, files, slotId) => {
         if (fields.booking_date)
           booking.booking_date = fields.booking_date;
 
-        if (fields.order_detail)
-          booking.order_details = fields.order_detail;
+        if (fields.order_details)
+          booking.order_details = fields.order_details[0];
       }
 
       if (Object.keys(formattedPrescriptions).length !== 0)
