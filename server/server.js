@@ -7,8 +7,10 @@
 
 const loopback = require('loopback');
 const boot = require('loopback-boot');
+const fileUpload = require('express-fileupload');
 
 const app = module.exports = loopback();
+app.use(fileUpload());
 
 app.start = function () {
   // start the web server

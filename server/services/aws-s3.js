@@ -54,14 +54,13 @@ class AWS_S3 {
 
   /**
    * This function will be used by the API to generate a thumbnail and upload both the original and thumbnail to AWS S3
-   * @param {String} filePath 
+   * @param {Buffer} originalFileBuffer 
    * @param {String} name 
    * @param {String} user_id
    */
-  generateThumbnailAndUpload(filePath, name, user_id) {
+  generateThumbnailAndUpload(originalFileBuffer, name, user_id) {
     name = user_id + '_' + moment().format('YYYY_MM_DD_hh_mm_SS') + '_' + name;
-    let originalFileBuffer = fs.readFileSync(filePath);
-    return this.generateThumbnail(filePath)
+    return this.generateThumbnail(originalFileBuffer)
       .then(resizedFileBuffer => {
         let resizedFilename = "thumbnail-" + name;
         let promiseArr = [

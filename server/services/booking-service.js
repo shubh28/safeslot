@@ -15,7 +15,7 @@ module.exports.bookSlot = (app, fields, files) => {
   if (files) {
     files.prescriptions.forEach(file => {
       promiseArr.push(
-        AWS_S3.generateThumbnailAndUpload(file.path, file.originalFilename, fields.user_id)
+        AWS_S3.generateThumbnailAndUpload(file.data, file.name, fields.user_id)
           .then(data => formatUploadedObject(data))
       );
     });
@@ -47,22 +47,21 @@ module.exports.updateSlot = (app, fields, files, slotId) => {
   console.log(fields);
   console.log(files);
   let promiseArr = [];
-  if (files) {
-    files.prescriptions.forEach(file => {
-      promiseArr.push(
-        AWS_S3.generateThumbnailAndUpload(file.path, file.originalFilename, fields.user_id)
-          .then(data => formatUploadedObject(data))
-      );
-    });
-  }
 
   let booking;
   return Bookings.findById(slotId)
     .then(savedBooking => {
       booking = savedBooking;
-      if (!booking) {
-        console.log(`no booking found for slot ${slotId}`);
-        return Promise.reject();
+      if (!booking)
+        return Promise.reject(`no booking found for slot ${slotId}`);
+
+      if (files) {
+        files.prescriptions.forEach(file => {
+          promiseArr.push(
+            AWS_S3.generateThumbnailAndUpload(file.data, file.name, fields.user_id)
+              .then(data => formatUploadedObject(data))
+          );
+        });
       }
 
       return Promise.all(promiseArr);

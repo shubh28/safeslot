@@ -1,5 +1,4 @@
 var loopback = require("loopback");
-let multiparty = require('multiparty');
 let bookingService = require('../services/booking-service');
 
 module.exports = function (app) {
@@ -125,34 +124,17 @@ module.exports = function (app) {
 
 
   router.post("/api/booking-slot/", (req, res) => {
-    let form = new multiparty.Form();
-
-    form.parse(req, (err, fields, files) => {
-      if (err) {
-        console.error(err);
-        res.status(500).json({ msg: 'Something went wrong' }).send();
-      }
-
-      bookingService.bookSlot(app, fields, files)
-        .then(data => res.json(data))
-        .catch(err => res.status(500).json({ msg: 'Something went wrong' }));
-    });
+    bookingService.bookSlot(app, req.body, req.files)
+      .then(data => res.json(data))
+      .catch(err => res.status(500).json({ msg: 'Something went wrong' }));
   })
 
   router.patch("/api/booking-slot/", (req, res) => {
-    let form = new multiparty.Form();
     const slotId = req.query.slotId;
 
-    form.parse(req, (err, fields, files) => {
-      if (err) {
-        console.error(err);
-        res.status(500).json({ msg: 'Something went wrong' }).send();
-      }
-
-      bookingService.updateSlot(app, fields, files, slotId)
-        .then(data => res.json(data))
-        .catch(err => res.status(500).json({ msg: 'Something went wrong' }));
-    });
+    bookingService.updateSlot(app, req.body, req.files, slotId)
+      .then(data => res.json(data))
+      .catch(err => res.status(500).json({ msg: 'Something went wrong' }));
   })
 
 

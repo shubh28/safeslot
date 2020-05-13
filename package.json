@@ -14,6 +14,7 @@
     "aws-sdk": "^2.669.0",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
+    "express-fileupload": "^1.1.7-alpha.3",
     "fs": "0.0.1-security",
     "helmet": "^3.22.0",
     "loopback": "^3.27.0",
@@ -21,7 +22,6 @@
     "loopback-component-explorer": "^6.2.0",
     "loopback-connector-mongodb": "^4.2.0",
     "moment": "^2.25.3",
-    "multiparty": "^4.2.1",
     "serve-favicon": "^2.0.1",
     "sharp": "^0.25.2",
     "strong-error-handler": "^3.0.0"
