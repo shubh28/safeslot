@@ -55,7 +55,9 @@ module.exports.updateSlot = (app, fields, files, slotId) => {
       if (!booking)
         return Promise.reject(`no booking found for slot ${slotId}`);
 
-      if (files) {
+      if (files && files.prescriptions) {
+        if (!Array.isArray(files.prescriptions))
+          files.prescriptions = [files.prescriptions];
         files.prescriptions.forEach(file => {
           promiseArr.push(
             AWS_S3.generateThumbnailAndUpload(file.data, file.name, fields.user_id)
