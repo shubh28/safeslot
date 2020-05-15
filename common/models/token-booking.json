@@ -13,7 +13,13 @@
     "token_number": {
       "type": "number",
       "required": true
+    },
+    "date": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now"
     }
+
   },
   "validations": [],
   "relations": {
