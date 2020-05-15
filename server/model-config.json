@@ -38,5 +38,13 @@
   "stores_slots": {
     "dataSource": "bookfromhome",
     "public": true
+  },
+  "tokens": {
+    "dataSource": "bookfromhome",
+    "public": true
+  },
+  "tokenBooking": {
+    "dataSource": "bookfromhome",
+    "public": true
   }
 }

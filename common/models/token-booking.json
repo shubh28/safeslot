@@ -1,0 +1,31 @@
+{
+  "name": "tokenBooking",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "mobile": {
+      "type": "string",
+      "required": true
+    },
+    "token_number": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "stores": {
+      "type": "belongsTo",
+      "model": "stores",
+      "foreignKey": "store_id",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
