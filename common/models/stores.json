@@ -60,6 +60,9 @@
     },
     "referredBy": {
       "type": "string"
+    },
+    "updatedBy": {
+      "type": "string"
     }
   },
   "validations": [],
