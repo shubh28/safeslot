@@ -1,29 +1,32 @@
 {
-  "name": "stores_slots_count",
+  "name": "tokenBooking",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
-    "validateUpsert": true,
-    "strictObjectIDCoercion": true
+    "validateUpsert": true
   },
   "properties": {
-    "slot_count": {
+    "mobile": {
+      "type": "string",
+      "required": true
+    },
+    "token_number": {
       "type": "number",
+      "required": true
+    },
+    "date": {
+      "type": "date",
       "required": true,
-      "default": 0
+      "defaultFn": "now"
     }
+
   },
   "validations": [],
   "relations": {
     "stores": {
-      "type": "hasMany",
-      "model": "stores",
-      "foreignKey": ""
-    },
-    "slots": {
       "type": "belongsTo",
-      "model": "slots",
-      "foreignKey": "",
+      "model": "stores",
+      "foreignKey": "store_id",
       "options": {
         "nestRemoting": true
       }

@@ -63,15 +63,39 @@
     },
     "updatedBy": {
       "type": "string"
+    "created_at": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now"
+    },
+    "shop_open_hours": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "shop_open_minutes": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "shop_close_hours": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "shop_close_minutes": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "slot_duration": {
+      "type": "number",
+      "required": true,
+      "default": 15
     }
   },
   "validations": [],
   "relations": {
-    "stores_slots_count": {
-      "type": "hasMany",
-      "model": "stores_slots_count",
-      "foreignKey": ""
-    },
     "stores_slots": {
       "type": "hasMany",
       "model": "stores_slots",

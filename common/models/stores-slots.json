@@ -26,6 +26,11 @@
     "maximun_people_allowed": {
       "type": "number",
       "required": true
+    },
+    "created_at": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now"
     }
   },
   "validations": [],
@@ -37,6 +42,11 @@
       "options": {
         "nestRemoting": true
       }
+    },
+    "bookings": {
+      "type": "hasMany",
+      "model": "bookings",
+      "foreignKey": "slot_id"
     }
   },
   "acls": [],
