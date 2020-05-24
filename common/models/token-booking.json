@@ -21,8 +21,7 @@
     },
     "realization_date": {
       "type": "date",
-      "required": true,
-      "defaultFn": "now"
+      "required": false
     }
   },
   "validations": [],
