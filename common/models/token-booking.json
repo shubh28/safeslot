@@ -18,8 +18,11 @@
       "type": "date",
       "required": true,
       "defaultFn": "now"
+    },
+    "realization_date": {
+      "type": "date",
+      "required": false
     }
-
   },
   "validations": [],
   "relations": {
