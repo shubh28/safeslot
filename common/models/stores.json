@@ -61,6 +61,8 @@
     "referredBy": {
       "type": "string"
     },
+    "updatedBy": {
+      "type": "string"
     "created_at": {
       "type": "date",
       "required": true,
